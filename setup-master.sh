@@ -2,7 +2,7 @@
 sudo apt-get update
 sudo apt-get install -y nginx keepalived
 
-# Config  trang web)
+# Config  trang web
 cat <<EOF | sudo tee /var/www/html/index.html
 <!DOCTYPE html>
 <html>
