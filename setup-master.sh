@@ -2,13 +2,24 @@
 sudo apt-get update
 sudo apt-get install -y nginx keepalived
 
-# Cài đặt Nginx (có thể cấu hình trang web tại đây)
+# Config  trang web)
+cat <<EOF | sudo tee /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Nginx!</title>
+</head>
+<body>
+    <h1>Success! The Nginx server is working!</h1>
+</body>
+</html>
+EOF
 
 # Cấu hình Keepalived cho Master
 cat <<EOF | sudo tee /etc/keepalived/keepalived.conf
 vrrp_instance VI_1 {
     state MASTER
-    interface eth1
+    interface enp0s8
     virtual_router_id 50
     priority 100
     advert_int 1
