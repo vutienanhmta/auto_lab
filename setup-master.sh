@@ -17,6 +17,11 @@ EOF
 
 # Cấu hình Keepalived cho Master
 cat <<EOF | sudo tee /etc/keepalived/keepalived.conf
+vrrp_script check_nginx {
+    script "/etc/keepalived/check_nginx.sh"
+    interval 2 
+    weight -50
+}
 vrrp_instance VI_1 {
     state MASTER
     interface enp0s8
@@ -29,6 +34,9 @@ vrrp_instance VI_1 {
     }
     virtual_ipaddress {
         192.168.56.40
+    }
+    track_script {
+        check_nginx
     }
 }
 EOF
